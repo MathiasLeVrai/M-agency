@@ -1,0 +1,5 @@
+# Remplacer https://www.magency.fr par votre URL de production avant mise en ligne.
+User-agent: *
+Allow: /
+
+Sitemap: https://www.magency.fr/sitemap.xml
