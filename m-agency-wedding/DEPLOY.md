@@ -4,20 +4,19 @@
 
 1. **URL du site** — Remplacer `https://www.magency.fr` dans :
    - `index.html` (`canonical`, Open Graph, Twitter Card, JSON-LD)
-   - `merci.html` et `mentions-legales.html` (`canonical`)
+   - `merci.html`, `mentions-legales.html` et `politique-confidentialite.html` (`canonical`)
    - `robots.txt` et `sitemap.xml`
 
 2. **Mentions légales** — Compléter `mentions-legales.html` (SIRET, forme juridique, directeur de publication, hébergeur).
 
-3. **Formulaire Netlify** — Le formulaire est prêt pour [Netlify Forms](https://docs.netlify.com/forms/setup/) :
-   - Déployez le dossier sur Netlify (glisser-déposer ou Git).
-   - Activez les notifications (email / Slack) dans le tableau de bord Netlify → Forms.
-   - Sans JavaScript, l’envoi redirige vers `merci.html`.
+3. **Formulaire** — Comportement par défaut : [Netlify Forms](https://docs.netlify.com/forms/setup/).
+   - Déployez sur Netlify ; après le premier déploiement, le formulaire est actif.
+   - **À faire une fois** : Netlify → **Forms** → **Notifications** (email ou Slack) pour recevoir les messages.
+   - Sans JavaScript, l’envoi POST vers `/` redirige vers `merci.html` grâce au champ `redirect`.
+   - **reCAPTCHA (Netlify)** : le formulaire inclut `data-netlify-recaptcha="true"`. Après déploiement sur Netlify, le widget est injecté automatiquement (aucune clé API à mettre dans le code). Les soumissions sont vérifiées côté Netlify ; Google traite des données aux fins anti-bot — voir la politique de confidentialité du site.
+   - **Si le site est sur Vercel ou un hébergeur statique sans Netlify Forms** : dans `index.html`, retirez `data-netlify="true"`, `data-netlify-recaptcha="true"`, le bloc `<div class="form-recaptcha">…</div>`, `netlify-honeypot`, l’input `bot-field`, les champs cachés `form-name` et `redirect`, puis mettez `action="https://formspree.io/f/VOTRE_ID"` et `method="POST"`. Activez la protection anti-spam dans le tableau de bord Formspree si besoin. Le script envoie en `fetch` vers cette URL.
 
-4. **Alternative Formspree** — Retirez `data-netlify`, `netlify-honeypot` et l’input caché `form-name`, puis définissez par exemple  
-   `action="https://formspree.io/f/VOTRE_ID" method="POST"`. Le script enverra en `fetch` si l’`action` pointe vers `formspree.io`.
-
-5. **Tests** — Vérifier le parcours mobile, le menu, le formulaire en production et les liens externes (Maps, téléphone).
+4. **Tests** — Vérifier le parcours mobile, le menu, le formulaire en production et les liens externes (Maps, téléphone).
 
 ## Déploiement rapide
 
@@ -39,3 +38,10 @@ Si le dépôt Git **est** uniquement le contenu de `m-agency-wedding` (avec `ind
 ## Favicon
 
 `favicon.svg` est référencé dans les pages. Vous pouvez le remplacer par une version exportée depuis votre charte graphique.
+
+## Sécurité (niveau site statique)
+
+- **Transport** : en production, HTTPS est fourni par l’hébergeur (Netlify, Vercel, etc.) — à ne pas désactiver.
+- **En-têtes** : `netlify.toml` et `vercel.json` envoient déjà `X-Frame-Options`, `X-Content-Type-Options`, `Referrer-Policy`, `Permissions-Policy` (réduit clickjacking, MIME sniffing, fuite de référent).
+- **Formulaire** : pas de clé secrète dans le dépôt ; les données partent vers Netlify ou (si configuré) Formspree — ce sont eux qui traitent l’email. Risques résiduels : **spam** (honeypot Netlify + filtres côté tableau de bord ; Formspree propose aussi du filtrage), **suroptimisation** (limites gratuites). Pour aller plus loin : captcha (ex. hCaptcha) ou champ challenge côté prestataire.
+- **RGPD** : une **politique de confidentialité** dédiée est dans `politique-confidentialite.html` (sous-traitants type Netlify, reCAPTCHA/Google, droits des personnes). Complétez les encadrés « à compléter » et l’hébergeur dans les mentions légales ; adaptez le paragraphe Formspree si vous n’utilisez pas Netlify.

@@ -214,8 +214,10 @@
       </div>
     </div>
     <div class="form-card reveal">
-      <form id="leadForm" name="contact" method="POST" action="merci.html" data-netlify="true" netlify-honeypot="bot-field">
+      <!-- Formulaire : sur Netlify, rien d’autre à coder après déploiement (activer l’email dans Forms). Sur Vercel ou autre statique : remplacer par Formspree — voir DEPLOY.md -->
+      <form id="leadForm" name="contact" method="POST" action="/" data-netlify="true" data-netlify-recaptcha="true" netlify-honeypot="bot-field">
         <input type="hidden" name="form-name" value="contact">
+        <input type="hidden" name="redirect" value="/merci.html">
         <p class="visually-hidden">
           <label>Ne pas remplir si vous êtes humain : <input type="text" name="bot-field" tabindex="-1" autocomplete="off"></label>
         </p>
@@ -238,6 +240,8 @@
           <select id="budget" class="form-select" name="budget"><option value="">Sélectionner une fourchette</option><option value="lt20k">Moins de 20 000 €</option><option value="20-50k">20 000 € – 50 000 €</option><option value="50-100k">50 000 € – 100 000 €</option><option value="gt100k">100 000 € et plus</option><option value="na">Je préfère ne pas préciser</option></select>
         </div>
         <div class="form-group full"><label class="form-label" for="message">Parlez-Nous de Votre Vision</label><textarea id="message" class="form-textarea" name="message" placeholder="Décrivez-nous le mariage de vos rêves..."></textarea></div>
+        <p class="form-privacy-notice">En envoyant ce message, vous acceptez le traitement de vos données pour répondre à votre demande, conformément à notre <a href="politique-confidentialite.html">politique de confidentialité</a>.</p>
+        <div class="form-recaptcha"><div data-netlify-recaptcha="true"></div></div>
         <button type="submit" class="form-submit">Réservez Votre Consultation Gratuite</button>
       </form>
     </div>
@@ -266,6 +270,7 @@
       <a href="#why-us">Notre Agence</a>
       <a href="#contact">Contact</a>
       <a href="mentions-legales.html">Mentions légales</a>
+      <a href="politique-confidentialite.html">Confidentialité</a>
     </div>
     <p class="footer-copy">© 2026 M AGENCY Event & Wedding. Tous droits réservés. Organisateur de mariages et événements à Ceyreste, Bouches-du-Rhône.</p>
   </div>

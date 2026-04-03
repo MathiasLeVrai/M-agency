@@ -124,6 +124,11 @@ section{padding:7rem 2rem}
 .form-input::placeholder,.form-textarea::placeholder{color:var(--champagne)}
 .form-textarea{resize:vertical;min-height:120px}
 .form-select{cursor:pointer;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23C4A265' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 1rem center;padding-right:2.5rem}
+.form-privacy-notice{font-size:.72rem;line-height:1.6;color:var(--text-light);margin:.25rem 0 1rem}
+.form-privacy-notice a{color:var(--gold);font-weight:500;text-decoration:none}
+.form-privacy-notice a:hover{text-decoration:underline}
+.form-recaptcha{margin:.5rem 0 1rem;min-height:78px}
+.form-recaptcha:empty{min-height:0;margin:0}
 .form-submit{width:100%;font-family:var(--font-body);font-size:.7rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;padding:1.1rem;background:var(--gold);color:var(--warm-white);border:none;cursor:pointer;transition:all .3s;margin-top:.5rem}
 .form-submit:hover{background:var(--gold-light)}
 
